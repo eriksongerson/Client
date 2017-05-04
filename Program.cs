@@ -14,7 +14,15 @@ namespace Test_OS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if(Client.Get_IP() == "" || Client.Get_PCname() == "")
+            {
+                Application.Run(new ChangeIP());
+                Application.Run(new MainForm());
+            }
+            else
+            {
+                Application.Run(new MainForm());
+            }
         }
     }
 }

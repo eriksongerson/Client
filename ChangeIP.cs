@@ -11,6 +11,7 @@ namespace Test_OS
 {
     public partial class ChangeIP : Form
     {
+
         public ChangeIP()
         {
             InitializeComponent();
@@ -23,6 +24,10 @@ namespace Test_OS
             sw.WriteLine("IPADDR=" + textBox1.Text );
             sw.WriteLine("PCNAME=" + textBox2.Text );
             sw.Close();
+
+            Client.Set_IP();
+            Client.Set_PCname();
+
             this.Close();
         }
 
@@ -39,6 +44,7 @@ namespace Test_OS
                 arr = Line.Split('=');
                 string PCname = arr[1];
                 textBox2.Text = PCname;
+                sr.Close();
             }
             catch (Exception)
             {

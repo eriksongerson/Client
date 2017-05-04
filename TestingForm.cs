@@ -36,7 +36,7 @@ namespace Test_OS
 
             if (Vibor == Convert.ToInt32(Client.Questions[Number+1, 5]))
             {
-                client.Set_RightQuantity(client.Get_RightQuantity() + 1);
+                Client.Set_RightQuantity(Client.Get_RightQuantity() + 1);
             }
 
             if (Number == -1)
@@ -56,9 +56,9 @@ namespace Test_OS
             q3.Checked = false;
             q4.Checked = false;
             Visual();
-            qN.Text = client.Get_StudentName();
-            qF.Text = client.Get_StudentSurname();
-            Number = client.Get_TotalQuestions();
+            qN.Text = Client.Get_StudentName();
+            qF.Text = Client.Get_StudentSurname();
+            Number = Client.Get_TotalQuestions();
         }
 
         void Visual()

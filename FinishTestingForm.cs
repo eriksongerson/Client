@@ -11,7 +11,7 @@ namespace Test_OS
     public partial class FinishTestingForm : Form
     {
 
-        Client client = new Client();
+        //Client client = new Client();
 
         public FinishTestingForm()
         {
@@ -25,26 +25,26 @@ namespace Test_OS
 
         private void FinishTestingForm_Load(object sender, EventArgs e)
         {
-            qF.Text = client.Get_StudentSurname();
-            qN.Text = client.Get_StudentName();
-            qResult.Text = Convert.ToString(client.Get_RightQuantity());
+            qF.Text = Client.Get_StudentSurname();
+            qN.Text = Client.Get_StudentName();
+            qResult.Text = Convert.ToString(Client.Get_RightQuantity());
 
-            if (client.Get_RightQuantity() <= 23)
+            if (Client.Get_RightQuantity() <= 23)
             {
                 label4.Text = "2";
             }
             
-            if (client.Get_RightQuantity() >= 24 && client.Get_RightQuantity() <= 31)
+            if (Client.Get_RightQuantity() >= 24 && Client.Get_RightQuantity() <= 31)
             {
                 label4.Text = "3";
             }
             
-            if (client.Get_RightQuantity() >= 32 && client.Get_RightQuantity() <= 40)
+            if (Client.Get_RightQuantity() >= 32 && Client.Get_RightQuantity() <= 40)
             {
                 label4.Text = "4";
             }
             
-            if (client.Get_RightQuantity() >= 41 && client.Get_RightQuantity() <= 46)
+            if (Client.Get_RightQuantity() >= 41 && Client.Get_RightQuantity() <= 46)
             {
                 label4.Text = "5";
             }
