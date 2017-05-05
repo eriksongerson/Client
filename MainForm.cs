@@ -52,11 +52,9 @@ namespace Test_OS
             //Даём задание другому сокету, чтобы он попросил у сервера вопросы
             Thread FourthThread = new Thread(new ThreadStart(MultiSocket));
             while (Client.isConnected == false) ;
-            InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Question:" + comboBox1.Text + ":" + comboBox2.Text;
+            InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Questions:" + comboBox1.Text + ":" + comboBox2.Text;
             FourthThread.Start();
             while (Client.Questions.Length == 0) ;
-            TestingForm TF = new TestingForm();
-            TF.Show();
         }
 
         private void qEndApp_Click(object sender, EventArgs e)
@@ -204,7 +202,7 @@ namespace Test_OS
                                 Client.Questions[i, j] = Current[j];
                             }
                         }
-                        this.Hide();
+                        MainForm.ActiveForm.Hide();
 
                         TestingForm tf = new TestingForm();
                         tf.Show();
