@@ -23,6 +23,19 @@ namespace Test_OS
             {
                 Application.Run(new MainForm());
             }
+
+            if (MainForm.FirstThread.IsAlive) 
+                MainForm.FirstThread.Abort();
+            if(MainForm.SecondThread.IsAlive)
+                MainForm.SecondThread.Abort();
+            if(MainForm.ThirdThread.IsAlive)
+                MainForm.ThirdThread.Abort();
+            if(MainForm.FourthThread.IsAlive)
+                MainForm.FourthThread.Abort();
+
+            while (MainForm.FirstThread.IsAlive || MainForm.SecondThread.IsAlive || MainForm.ThirdThread.IsAlive || MainForm.FourthThread.IsAlive) ;
+
+            Environment.Exit(1);
         }
     }
 }

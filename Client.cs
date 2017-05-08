@@ -9,9 +9,10 @@ namespace Test_OS
     class Client
     {
 
-        public static string[,] Questions = new string[100, 6];
+        public static string[,] Questions = new string[100, 7];
 
         public static bool isConnected = false;
+        public static bool isQuestionFull = false;
 
         private static string PCname = "";
 

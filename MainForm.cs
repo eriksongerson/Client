@@ -19,6 +19,11 @@ namespace Test_OS
         private int port = 12345;
         private static string InputMessage = "";
 
+        public static Thread FirstThread;
+        public static Thread SecondThread;
+        public static Thread ThirdThread;
+        public static Thread FourthThread;
+
         public MainForm()
         {
             InitializeComponent();
@@ -29,14 +34,14 @@ namespace Test_OS
             Client.Set_IP();
             Client.Set_PCname();
 
-            Thread FirstThread = new Thread(new ThreadStart(MultiSocket));
+            FirstThread = new Thread(new ThreadStart(MultiSocket));
             InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Subjects";
             FirstThread.Start();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Thread SecondThread = new Thread(new ThreadStart(MultiSocket));
+            SecondThread = new Thread(new ThreadStart(MultiSocket));
             InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Themes:" + comboBox1.Text;
             SecondThread.Start();
             comboBox2.Enabled = true;
@@ -45,16 +50,23 @@ namespace Test_OS
         private void qStartTest_Click(object sender, EventArgs e)
         {
             //Даём задание для одного сокета, чтобы он отсылал сообщение о том, что хотим подключиться
-            Thread ThirdThread = new Thread(new ThreadStart(MultiSocket));
+            ThirdThread = new Thread(new ThreadStart(MultiSocket));
             InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Connect";
             ThirdThread.Start();
 
             //Даём задание другому сокету, чтобы он попросил у сервера вопросы
-            Thread FourthThread = new Thread(new ThreadStart(MultiSocket));
-            while (Client.isConnected == false) ;
+            FourthThread = new Thread(new ThreadStart(MultiSocket));
+            while (!Client.isConnected) ;
             InputMessage = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Questions:" + comboBox1.Text + ":" + comboBox2.Text;
             FourthThread.Start();
-            while (Client.Questions.Length == 0) ;
+            while (!Client.isQuestionFull) ;
+
+            Client.Set_StudentName(qNameStud.Text);
+            Client.Set_StudentSurname(qFamStud.Text);
+
+            TestingForm tf = new TestingForm();
+            this.Hide();
+            tf.Show();
         }
 
         private void qEndApp_Click(object sender, EventArgs e)
@@ -97,18 +109,18 @@ namespace Test_OS
 
         public void MultiSocket()
         {
-            Client client = new Client();
-            m:
+            
             string message = InputMessage;
             InputMessage = null;
+            m:
+            Socket socket = null;
+            Client.Set_IP();
+            string IP = Client.Get_IP();
             try
             {
-                Client.Set_IP();
-                string IP = Client.Get_IP();
-
                 IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(IP), port);
 
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 socket.Connect(ipPoint);
 
@@ -135,6 +147,8 @@ namespace Test_OS
             }
             catch (Exception ex)
             {
+                //socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
                 goto m;
             }
 
@@ -192,20 +206,19 @@ namespace Test_OS
                     }
                 case "Questions":
                     {
-                        string[] Line = message.Split(';');
+                        string[] Line = arr[1].Split(';');
                         int l = Line.Length;
-                        for (int i = 1; i < l; i++)
+                        Client.Set_TotalQuestions(l);
+                        for (int i = 0; i < l; i++)
                         {
-                            string[] Current = Line[i].Split(':');
-                            for (int j = 0; j < 6; j++)
+                            string[] Current = Line[i].Split('@');
+                            for (int j = 0; j < 7; j++)
                             {
                                 Client.Questions[i, j] = Current[j];
                             }
                         }
-                        MainForm.ActiveForm.Hide();
 
-                        TestingForm tf = new TestingForm();
-                        tf.Show();
+                        Client.isQuestionFull = true;
 
                         break;
                     }

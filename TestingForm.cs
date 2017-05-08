@@ -11,8 +11,6 @@ namespace Test_OS
     public partial class TestingForm : Form
     {
 
-        Client client = new Client();
-
         //Õ¿ƒŒ: 0-23="2"  24-31="3"  32-40="4"  41-46="5";
         //Õ¿ƒŒ: InactiveCaptionText;
 
@@ -34,7 +32,7 @@ namespace Test_OS
             if (q3.Checked == true) { Vibor = 3; };
             if (q4.Checked == true) { Vibor = 4; };
 
-            if (Vibor == Convert.ToInt32(Client.Questions[Number+1, 5]))
+            if (Vibor == Convert.ToInt32(Client.Questions[Number+1, 6]))
             {
                 Client.Set_RightQuantity(Client.Get_RightQuantity() + 1);
             }
@@ -42,7 +40,7 @@ namespace Test_OS
             if (Number == -1)
             { 
                 FinishTestingForm FinishTest = new FinishTestingForm();
-                this.Visible = false;
+                this.Hide();
                 FinishTest.Show();
             }
 
@@ -65,13 +63,12 @@ namespace Test_OS
         {
             try
             {
-                qQ.Text = Client.Questions[Number, 0].ToString();
-                q1.Text = Client.Questions[Number, 1].ToString();
-                q2.Text = Client.Questions[Number, 2].ToString();
-                q3.Text = Client.Questions[Number, 3].ToString();
-                q4.Text = Client.Questions[Number, 4].ToString();
+                qQ.Text = Client.Questions[Number, 1].ToString();
+                q1.Text = Client.Questions[Number, 2].ToString();
+                q2.Text = Client.Questions[Number, 3].ToString();
+                q3.Text = Client.Questions[Number, 4].ToString();
+                q4.Text = Client.Questions[Number, 5].ToString();
                 qNum.Text = Convert.ToString(Number+1);
-                //label1.Text = Convert.ToString(NullPage.Bingo);
             }
             catch { }
         }
