@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace Test_OS
 {
@@ -15,6 +18,10 @@ namespace Test_OS
         //ÍÀÄÎ: InactiveCaptionText;
 
         int Number = 0;
+        Thread WT = null;
+
+        private static bool isAnswerSent = false;
+        private static string message = null;
 
         public TestingForm()
         {
@@ -37,14 +44,20 @@ namespace Test_OS
                 Client.Set_RightQuantity(Client.Get_RightQuantity() + 1);
             }
 
+            message = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Answer:" + Convert.ToString(Client.Get_TotalQuestions() - Number) + ":" + Client.Get_TotalQuestions() + ":" + (Vibor == Convert.ToInt32(Client.Questions[Number + 1, 6]));
+            isAnswerSent = true;
+
             if (Number == -1)
-            { 
+            {
+                WT.Abort();
+                while (WT.IsAlive) ;
                 FinishTestingForm FinishTest = new FinishTestingForm();
                 this.Hide();
                 FinishTest.Show();
             }
 
             Visual();
+            
         }
 
         private void TestingForm_Load(object sender, EventArgs e)
@@ -57,6 +70,20 @@ namespace Test_OS
             qN.Text = Client.Get_StudentName();
             qF.Text = Client.Get_StudentSurname();
             Number = Client.Get_TotalQuestions();
+
+            WT = new Thread(delegate ()
+            {
+                m:
+                while (isAnswerSent)
+                {
+                    AnswerSocket();
+                }
+                while (!isAnswerSent) ;
+                goto m;                
+            });
+            WT.Start();
+            while (!WT.IsAlive) ;
+
         }
 
         void Visual()
@@ -72,5 +99,56 @@ namespace Test_OS
             }
             catch { }
         }
+
+        private void AnswerSocket()
+        {
+            int port = 12345;
+            m:
+            Socket socket = null;
+            Client.Set_IP();
+            string IP = Client.Get_IP();
+            try
+            {
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(IP), port);
+
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                socket.Connect(ipPoint);
+
+                byte[] data = Encoding.Unicode.GetBytes(message);
+
+                socket.Send(data);
+
+                data = new byte[256];
+                StringBuilder builder = new StringBuilder();
+                int bytes = 0;
+
+                do
+                {
+                    bytes = socket.Receive(data, data.Length, 0);
+                    builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                }
+                while (socket.Available > 0);
+
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+
+                if(builder.ToString() == "Answer;" + Client.Get_PCname() + ":Updated")
+                {
+                    isAnswerSent = false;
+                    message = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+                goto m;
+            }
+
+            
+        }
+
     }
 }

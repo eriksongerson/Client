@@ -15,6 +15,7 @@ namespace Test_OS
     {
 
         //Client client = new Client();
+        Thread T = null;
 
         public FinishTestingForm()
         {
@@ -59,12 +60,11 @@ namespace Test_OS
                 label4.Text = "5";
             }
 
-            string message = ""
+            string message = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Completed" + ":" + Client.Get_StudentSurname() + ":" + Client.Get_StudentName() + ":" + Client.Get_Subject() + ":" + Client.Get_Theme() + ":" + Mark;
 
-            Thread T = new Thread(delegate() 
+            T = new Thread(delegate() 
             {
-
-
+                m:
                 int port = 12345;
                 Socket socket = null;
                 Client.Set_IP();
@@ -95,7 +95,10 @@ namespace Test_OS
                     socket.Shutdown(SocketShutdown.Both);
                     socket.Close();
 
-                    MessageHandler(builder.ToString());
+                    if(builder.ToString() == "Completed;" + Client.Get_PCname() + ":Complited")
+                    {
+                        Client.isConnected = false;
+                    }
 
                 }
                 catch (Exception ex)

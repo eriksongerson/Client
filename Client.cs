@@ -19,6 +19,9 @@ namespace Test_OS
         private static string NameStudent = "";
         private static string SurnameStudent = "";
 
+        private static string Subject = "";
+        private static string Theme = "";
+
         private static int RightQuantity = 0;
         private static int TotalQuestions = 0;
 
@@ -98,6 +101,24 @@ namespace Test_OS
         public static void Set_StudentSurname(string value)
         {
             SurnameStudent = value;
+        }
+
+        public static void Set_Subject(string value)
+        {
+            Subject = value;
+        }
+        public static string Get_Subject()
+        {
+            return Subject;
+        }
+
+        public static void Set_Theme(string value)
+        {
+            Theme = value;
+        }
+        public static string Get_Theme()
+        {
+            return Theme;
         }
 
         //Конструктор:

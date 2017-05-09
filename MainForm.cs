@@ -64,6 +64,8 @@ namespace Test_OS
             Client.Set_StudentName(qNameStud.Text);
             Client.Set_StudentSurname(qFamStud.Text);
 
+            
+
             TestingForm tf = new TestingForm();
             this.Hide();
             tf.Show();
