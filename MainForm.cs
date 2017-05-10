@@ -64,7 +64,8 @@ namespace Test_OS
             Client.Set_StudentName(qNameStud.Text);
             Client.Set_StudentSurname(qFamStud.Text);
 
-            
+            Client.Set_Subject(comboBox1.Text);
+            Client.Set_Theme(comboBox2.Text);
 
             TestingForm tf = new TestingForm();
             this.Hide();

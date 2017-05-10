@@ -108,7 +108,10 @@ namespace Test_OS
                     goto m;
                 }
             });
-    
+
+            T.Start();
+
+            while (!T.IsAlive) ;
 
        }
     }

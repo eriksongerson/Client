@@ -36,7 +36,7 @@ namespace Test_OS
             if(MainForm.FourthThread != null && MainForm.FourthThread.IsAlive)
                 MainForm.FourthThread.Abort();
 
-            while (MainForm.FirstThread.IsAlive || MainForm.SecondThread.IsAlive || MainForm.ThirdThread.IsAlive || MainForm.FourthThread.IsAlive) ;
+            while ((MainForm.FirstThread != null && MainForm.FirstThread.IsAlive) || (MainForm.SecondThread != null && MainForm.SecondThread.IsAlive) || (MainForm.ThirdThread != null && MainForm.ThirdThread.IsAlive) || (MainForm.FourthThread != null && MainForm.FourthThread.IsAlive)) ;
 
             if(Client.isConnected == true)
             {
