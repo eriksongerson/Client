@@ -7,7 +7,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Test_OS
+namespace Client
 {
     public partial class ChangeIP : Form
     {

@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -60,34 +63,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeIP.cs">
+    <Compile Include="Forms\ChangeIP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeIP.Designer.cs">
+    <Compile Include="Forms\ChangeIP.Designer.cs">
       <DependentUpon>ChangeIP.cs</DependentUpon>
     </Compile>
-    <Compile Include="FinishTestingForm.cs">
+    <Compile Include="Forms\FinishTestingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FinishTestingForm.Designer.cs">
+    <Compile Include="Forms\FinishTestingForm.Designer.cs">
       <DependentUpon>FinishTestingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ResponseHandler.cs" />
+    <Compile Include="Helpers\SocketHelper.cs" />
+    <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Theme.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChangeIP.resx">
+    <Compile Include="Helpers\QuestionHelper.cs" />
+    <EmbeddedResource Include="Forms\ChangeIP.resx">
       <DependentUpon>ChangeIP.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FinishTestingForm.resx">
+    <EmbeddedResource Include="Forms\FinishTestingForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FinishTestingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,18 +107,20 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestingForm.resx">
+    <EmbeddedResource Include="Forms\TestingForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>TestingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Client.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -115,10 +128,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TestingForm.cs">
+    <Compile Include="Forms\TestingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestingForm.Designer.cs">
+    <Compile Include="Forms\TestingForm.Designer.cs">
       <DependentUpon>TestingForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>

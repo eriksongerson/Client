@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Test_OS
+namespace Client
 {
     public partial class TestingForm : Form
     {

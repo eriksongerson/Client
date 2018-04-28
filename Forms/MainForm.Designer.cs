@@ -1,4 +1,4 @@
-namespace Test_OS
+namespace Client
 {
     partial class MainForm
     {
@@ -39,17 +39,18 @@ namespace Test_OS
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // qEndApp
             // 
             this.qEndApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qEndApp.Location = new System.Drawing.Point(392, 199);
+            this.qEndApp.Location = new System.Drawing.Point(12, 228);
             this.qEndApp.Margin = new System.Windows.Forms.Padding(6);
             this.qEndApp.Name = "qEndApp";
-            this.qEndApp.Size = new System.Drawing.Size(179, 63);
+            this.qEndApp.Size = new System.Drawing.Size(179, 39);
             this.qEndApp.TabIndex = 0;
             this.qEndApp.Text = "Выход";
             this.qEndApp.UseVisualStyleBackColor = true;
@@ -57,7 +58,7 @@ namespace Test_OS
             // 
             // qFamStud
             // 
-            this.qFamStud.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.qFamStud.BackColor = System.Drawing.SystemColors.Window;
             this.qFamStud.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.qFamStud.Location = new System.Drawing.Point(120, 24);
             this.qFamStud.Margin = new System.Windows.Forms.Padding(6);
@@ -71,10 +72,10 @@ namespace Test_OS
             // 
             this.qStartTest.Enabled = false;
             this.qStartTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qStartTest.Location = new System.Drawing.Point(12, 199);
+            this.qStartTest.Location = new System.Drawing.Point(392, 228);
             this.qStartTest.Margin = new System.Windows.Forms.Padding(6);
             this.qStartTest.Name = "qStartTest";
-            this.qStartTest.Size = new System.Drawing.Size(179, 63);
+            this.qStartTest.Size = new System.Drawing.Size(179, 39);
             this.qStartTest.TabIndex = 2;
             this.qStartTest.Text = "Начать тест";
             this.qStartTest.UseVisualStyleBackColor = true;
@@ -82,7 +83,7 @@ namespace Test_OS
             // 
             // qNameStud
             // 
-            this.qNameStud.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.qNameStud.BackColor = System.Drawing.SystemColors.Window;
             this.qNameStud.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.qNameStud.Location = new System.Drawing.Point(120, 65);
             this.qNameStud.Margin = new System.Windows.Forms.Padding(6);
@@ -95,7 +96,7 @@ namespace Test_OS
             // groupBox1
             // 
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.qFamStud);
@@ -129,7 +130,8 @@ namespace Test_OS
             // 
             // comboBox1
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(132, 9);
@@ -140,7 +142,8 @@ namespace Test_OS
             // 
             // comboBox2
             // 
-            this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Enabled = false;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBox2.FormattingEnabled = true;
@@ -168,25 +171,32 @@ namespace Test_OS
             this.label4.Text = "Тема:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // label5
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(200, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 63);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Настройка сети";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label5.Location = new System.Drawing.Point(16, 193);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(164, 26);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "IP-адрес сервера:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(186, 193);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(369, 26);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(589, 278);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(589, 277);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
@@ -205,6 +215,7 @@ namespace Test_OS
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -219,9 +230,10 @@ namespace Test_OS
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
         public System.Windows.Forms.ComboBox comboBox1;
         public System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
