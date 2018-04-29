@@ -8,45 +8,30 @@ namespace Client.Helpers
 {
     public static class QuestionHelper
     {
+        public static Models.Client client = new Models.Client()
+        {
+            ip = SocketHelper.GetLocalIPAddress(),
+        };
 
-        public static List<Question> questions = new List<Question>();
+        private static List<Question> questions = new List<Question>();
+        public static List<Question> Questions
+        {
+            set 
+            { 
+                questions = value; 
+                TotalQuestions = questions.Count;
+            }
+            get { return questions; }
+        }
+
+        public static Subject currentSubject;
+        public static Theme currentTheme;
 
         //public static bool isConnected = false;
         //public static bool isQuestionFull = false;
 
-        //private static string PCname = "";
-
-        //private static string NameStudent = "";
-        //private static string SurnameStudent = "";
-
-        //private static string Subject = "";
-        //private static string Theme = "";
-
-        //private static int RightQuantity = 0;
-        //private static int TotalQuestions = 0;
-
-        //private static string IP = "";
-
-        ////Немного интерфейсов:
-        //public static string Get_IP()
-        //{
-        //    return IP;
-        //}
-        //public static void Set_IP()
-        //{
-        //    StreamReader sr = new StreamReader("settings.client");
-        //    while (!sr.EndOfStream)
-        //    {
-        //        string Line = sr.ReadLine();
-        //        string[] arr = Line.Split('=');
-        //        if(arr[0] == "IPADDR")
-        //        {
-        //            IP = arr[1];
-        //        }
-        //    }
-            
-        //    sr.Close();
-        //}
+        public static int RightQuantity = 0;
+        public static int TotalQuestions = 0;
 
         //public static string Get_PCname()
         //{

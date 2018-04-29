@@ -28,6 +28,9 @@ namespace Client
 
         List<Subject> subjects;
         List<Theme> themes;
+
+        Subject currentSubject;
+        Theme currentTheme;
         public void MainForm_Load(object sender, EventArgs e)
         {
             textBox1.Text = Properties.Settings.Default.ServerIP;
@@ -35,12 +38,7 @@ namespace Client
             Request request = new Request()
             {
                 request = "getSubjects",
-                client = new Models.Client()
-                {
-                    ip = SocketHelper.GetLocalIPAddress(),
-                    surname = qFamStud.Text,
-                    name = qNameStud.Text,
-                },
+                client = QuestionHelper.client,
                 body = null,
             };
 
@@ -51,6 +49,7 @@ namespace Client
                     // эта лямбда-функция для того, чтобы после запроса и его обработки выполнилось какое-либо событие
                     // она передаётся дальше
                     subjects = returned as List<Subject>;
+                    this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
                     foreach (Subject subject in subjects)
                     {
                         this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Add(subject.Name)));
@@ -61,22 +60,26 @@ namespace Client
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            foreach (Subject subject in subjects)
+            {
+                if(subject.Name == comboBox1.Text)
+                {
+                    currentSubject = subject;
+                }
+            }
+
             Request request = new Request()
             {
                 request = "getThemes",
-                client = new Models.Client()
-                {
-                    ip = SocketHelper.GetLocalIPAddress(),
-                    surname = qFamStud.Text,
-                    name = qNameStud.Text,
-                },
-                body = JsonConvert.SerializeObject($"{comboBox1.Text}", Formatting.Indented),
+                client = QuestionHelper.client,
+                body = JsonConvert.SerializeObject(currentSubject, Formatting.Indented),
             };
 
             new Thread(() => 
             {
                 SocketHelper.DoRequest(request, (returned) => {
                     themes = returned as List<Theme>;
+                    this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Clear()));
                     foreach (Theme theme in themes)
                     {
                         this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Add(theme.Name)));
@@ -87,30 +90,38 @@ namespace Client
             isFill();
         }
 
+        class discipline
+        {
+            public Subject subject;
+            public Theme theme;
+        }
+
         private void qStartTest_Click(object sender, EventArgs e)
         {
+            
+            discipline discipline = new discipline()
+            {
+                subject = currentSubject,
+                theme = currentTheme,
+            };
+
             Request request = new Request()
             {
                 request = "getQuestions",
-                client = new Models.Client()
-                {
-                    ip = SocketHelper.GetLocalIPAddress(),
-                    surname = qFamStud.Text,
-                    name = qNameStud.Text,
-                },
-                body = JsonConvert.SerializeObject(new List<string>(){comboBox1.Text, comboBox2.Text}, Formatting.Indented),
+                client = QuestionHelper.client,
+                body = JsonConvert.SerializeObject(discipline, Formatting.Indented),
             };
 
             new Thread(() => {
                 SocketHelper.DoRequest(request, (returned) => {
                     List<Question> questions = returned as List<Question>;
-                    QuestionHelper.questions = questions;
+                    QuestionHelper.Questions = questions;
 
                     // и переходим на форму тестирования
                     TestingForm testingForm = new TestingForm();
-                    this.Hide();
+                    this.BeginInvoke((MethodInvoker)(() => this.Hide()));
                     if (testingForm.ShowDialog() != DialogResult.OK)
-                        this.Close();
+                        this.BeginInvoke((MethodInvoker)(() => this.Close()));
                 });
             }).Start();
         }
@@ -122,6 +133,15 @@ namespace Client
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            foreach (Theme theme in themes)
+            {
+                if (theme.Name == comboBox2.Text)
+                {
+                    currentTheme = theme;
+                }
+            }
+
             isFill();
         }
 
@@ -139,11 +159,13 @@ namespace Client
 
         private void qFamStud_TextChanged(object sender, EventArgs e)
         {
+            QuestionHelper.client.surname = qFamStud.Text;
             isFill();
         }
 
         private void qNameStud_TextChanged(object sender, EventArgs e)
         {
+            QuestionHelper.client.name = qNameStud.Text;
             isFill();
         }
 

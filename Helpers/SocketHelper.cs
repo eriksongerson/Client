@@ -18,30 +18,35 @@ namespace Client.Helpers
         public static void DoRequest(Request request, Execute execute)
         {
             TcpClient tcpClient = null;
-            try{
+            try
+            {
                 tcpClient = new TcpClient(ip, port);
+            }
+            catch(SocketException ex)
+            {
+                
+            }
+            
+            try{
                 NetworkStream networkStream = tcpClient.GetStream();
 
                 string message = JsonConvert.SerializeObject(request, Formatting.Indented);
 
-                while (true)
-                {
-                    byte[] data = Encoding.Unicode.GetBytes(message);
-                    networkStream.Write(data, 0, data.Length);
+                byte[] data = Encoding.Unicode.GetBytes(message);
+                networkStream.Write(data, 0, data.Length);
             
-                    // получаем ответ
-                    data = new byte[256]; // буфер для получаемых данных
-                    StringBuilder builder = new StringBuilder();
-                    int bytes = 0;
-                    do
-                    {
-                        bytes = networkStream.Read(data, 0, data.Length);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                    }
-                    while (networkStream.DataAvailable);
-
-                    ResponseHandler.Handle(builder.ToString(), (sender) => execute(sender));
+                // получаем ответ
+                data = new byte[256]; // буфер для получаемых данных
+                StringBuilder builder = new StringBuilder();
+                int bytes = 0;
+                do
+                {
+                    bytes = networkStream.Read(data, 0, data.Length);
+                    builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                 }
+                while (networkStream.DataAvailable);
+
+                ResponseHandler.Handle(builder.ToString(), (sender) => execute(sender));
             }
             catch(Exception ex)
             {
@@ -49,7 +54,7 @@ namespace Client.Helpers
             }
             finally
             {
-                tcpClient?.Close();
+                tcpClient.Close();
             }
         }
 
