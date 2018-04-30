@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Client.Models;
 using System.Net;
+using System.Threading;
 
 namespace Client.Helpers
 {
@@ -21,13 +22,7 @@ namespace Client.Helpers
             try
             {
                 tcpClient = new TcpClient(ip, port);
-            }
-            catch(SocketException ex)
-            {
-                
-            }
             
-            try{
                 NetworkStream networkStream = tcpClient.GetStream();
 
                 string message = JsonConvert.SerializeObject(request, Formatting.Indented);
@@ -48,13 +43,15 @@ namespace Client.Helpers
 
                 ResponseHandler.Handle(builder.ToString(), (sender) => execute(sender));
             }
-            catch(Exception ex)
+            catch(SocketException)
             {
-                MessageBox.Show(ex.Message);
+                Thread thread = Thread.CurrentThread;
+                Thread.Sleep(5000);
+                DoRequest(request, execute);
             }
-            finally
+            finally 
             {
-                tcpClient.Close();
+                if (tcpClient != null) tcpClient.Close();
             }
         }
 

@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Helpers\ResponseHandler.cs" />
     <Compile Include="Helpers\SocketHelper.cs" />
+    <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Response.cs" />

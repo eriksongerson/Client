@@ -20,6 +20,7 @@ namespace Client.Helpers
             { 
                 questions = value; 
                 TotalQuestions = questions.Count;
+                currentQuestionId = -1;
             }
             get { return questions; }
         }
@@ -27,11 +28,22 @@ namespace Client.Helpers
         public static Subject currentSubject;
         public static Theme currentTheme;
 
+        public static Question GetNextQuestion()
+        {
+            currentQuestionId++;
+            if(currentQuestionId >= TotalQuestions)
+            {
+                return null;
+            }
+            return Questions[currentQuestionId];
+        }
+
         //public static bool isConnected = false;
         //public static bool isQuestionFull = false;
 
         public static int RightQuantity = 0;
         public static int TotalQuestions = 0;
+        public static int currentQuestionId = 0;
 
         //public static string Get_PCname()
         //{
