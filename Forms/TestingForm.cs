@@ -58,15 +58,15 @@ namespace Client
 
         private void qNext_Click(object sender, EventArgs e)
         {
-
-            CurrentQuestion = QuestionHelper.GetNextQuestion();
-
             int Choosen = 0;
 
             if (q1.Checked) Choosen = 1;
             if (q2.Checked) Choosen = 2;
             if (q3.Checked) Choosen = 3;
             if (q4.Checked) Choosen = 4;
+
+            if (Choosen == CurrentQuestion.RightOption)
+                QuestionHelper.RightQuantity++;
 
             Answer answer = new Answer()
             {
@@ -86,50 +86,30 @@ namespace Client
                 SocketHelper.DoRequest(request, null);
             }).Start(); 
 
-            //if (Vibor == Convert.ToInt32(QuestionHelper.Questions[Number+1]))
-            //{
-            //    Client.Set_RightQuantity(Client.Get_RightQuantity() + 1);
-            //}
-
-            //message = Client.Get_IP() + ":" + Client.Get_PCname() + ":" + "Answer:" + Convert.ToString(Client.Get_TotalQuestions() - Number) + ":" + Client.Get_TotalQuestions() + ":" + (Vibor == Convert.ToInt32(Client.Questions[Number + 1, 6]));
-            //isAnswerSent = true;
-
-            //if (Number == -1)
-            //{
-            //    WT.Abort();
-            //    while (WT.IsAlive) ;
-            //    FinishTestingForm FinishTest = new FinishTestingForm();
-            //    this.Hide();
-            //    FinishTest.Show();
-            //}
-
-            //Visual();
-            
+             CurrentQuestion = QuestionHelper.GetNextQuestion();
         }
 
         private void TestingForm_Load(object sender, EventArgs e)
         {
-
             CurrentQuestion = QuestionHelper.GetNextQuestion();
 
-            //qN.Text = Client.Get_StudentName();
-            //qF.Text = Client.Get_StudentSurname();
-            //Number = Client.Get_TotalQuestions();
+            clientNameLabel.Text = QuestionHelper.client.name;
+            clientSurnameLabel.Text = QuestionHelper.client.surname;
         }
 
         void Visual()
         {
-                q1.Checked = false;
-                q2.Checked = false;
-                q3.Checked = false;
-                q4.Checked = false;
+            q1.Checked = false;
+            q2.Checked = false;
+            q3.Checked = false;
+            q4.Checked = false;
 
-                qQ.Text = CurrentQuestion.Name;
-                q1.Text = CurrentQuestion.FirstOption;
-                q2.Text = CurrentQuestion.SecondOption;
-                q3.Text = CurrentQuestion.ThirdOption;
-                q4.Text = CurrentQuestion.FourthOption;
-                qNum.Text = Convert.ToString(Number + 1); 
+            QuestionField.Text = CurrentQuestion.Name;
+            q1.Text = CurrentQuestion.FirstOption;
+            q2.Text = CurrentQuestion.SecondOption;
+            q3.Text = CurrentQuestion.ThirdOption;
+            q4.Text = CurrentQuestion.FourthOption;
+            currentQuestionId.Text = $"{QuestionHelper.currentQuestionId}"; 
         }
     }
 }

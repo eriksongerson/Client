@@ -29,24 +29,24 @@ namespace Client
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.qF = new System.Windows.Forms.Label();
-            this.qN = new System.Windows.Forms.Label();
+            this.clientSurnameLabel = new System.Windows.Forms.Label();
+            this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.q4 = new System.Windows.Forms.RadioButton();
             this.q3 = new System.Windows.Forms.RadioButton();
             this.q2 = new System.Windows.Forms.RadioButton();
             this.q1 = new System.Windows.Forms.RadioButton();
-            this.qQ = new System.Windows.Forms.Label();
+            this.QuestionField = new System.Windows.Forms.Label();
             this.qNext = new System.Windows.Forms.Button();
-            this.qNum = new System.Windows.Forms.Label();
+            this.currentQuestionId = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.qF);
-            this.groupBox1.Controls.Add(this.qN);
+            this.groupBox1.Controls.Add(this.clientSurnameLabel);
+            this.groupBox1.Controls.Add(this.clientNameLabel);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(20, 19);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
@@ -57,29 +57,29 @@ namespace Client
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Информация о студенте";
             // 
-            // qF
+            // clientSurnameLabel
             // 
-            this.qF.AutoSize = true;
-            this.qF.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qF.ForeColor = System.Drawing.Color.Red;
-            this.qF.Location = new System.Drawing.Point(467, 35);
-            this.qF.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.qF.Name = "qF";
-            this.qF.Size = new System.Drawing.Size(28, 24);
-            this.qF.TabIndex = 1;
-            this.qF.Text = "---";
+            this.clientSurnameLabel.AutoSize = true;
+            this.clientSurnameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clientSurnameLabel.ForeColor = System.Drawing.Color.Red;
+            this.clientSurnameLabel.Location = new System.Drawing.Point(467, 35);
+            this.clientSurnameLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.clientSurnameLabel.Name = "clientSurnameLabel";
+            this.clientSurnameLabel.Size = new System.Drawing.Size(28, 24);
+            this.clientSurnameLabel.TabIndex = 1;
+            this.clientSurnameLabel.Text = "---";
             // 
-            // qN
+            // clientNameLabel
             // 
-            this.qN.AutoSize = true;
-            this.qN.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qN.ForeColor = System.Drawing.Color.Red;
-            this.qN.Location = new System.Drawing.Point(10, 35);
-            this.qN.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.qN.Name = "qN";
-            this.qN.Size = new System.Drawing.Size(28, 24);
-            this.qN.TabIndex = 0;
-            this.qN.Text = "---";
+            this.clientNameLabel.AutoSize = true;
+            this.clientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clientNameLabel.ForeColor = System.Drawing.Color.Red;
+            this.clientNameLabel.Location = new System.Drawing.Point(10, 35);
+            this.clientNameLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.clientNameLabel.Name = "clientNameLabel";
+            this.clientNameLabel.Size = new System.Drawing.Size(28, 24);
+            this.clientNameLabel.TabIndex = 0;
+            this.clientNameLabel.Text = "---";
             // 
             // groupBox2
             // 
@@ -87,7 +87,7 @@ namespace Client
             this.groupBox2.Controls.Add(this.q3);
             this.groupBox2.Controls.Add(this.q2);
             this.groupBox2.Controls.Add(this.q1);
-            this.groupBox2.Controls.Add(this.qQ);
+            this.groupBox2.Controls.Add(this.QuestionField);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(20, 113);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(5);
@@ -150,16 +150,16 @@ namespace Client
             this.q1.Text = "1";
             this.q1.UseVisualStyleBackColor = true;
             // 
-            // qQ
+            // QuestionField
             // 
-            this.qQ.BackColor = System.Drawing.Color.IndianRed;
-            this.qQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qQ.Location = new System.Drawing.Point(10, 27);
-            this.qQ.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.qQ.Name = "qQ";
-            this.qQ.Size = new System.Drawing.Size(995, 118);
-            this.qQ.TabIndex = 0;
-            this.qQ.Text = "---";
+            this.QuestionField.BackColor = System.Drawing.Color.IndianRed;
+            this.QuestionField.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.QuestionField.Location = new System.Drawing.Point(10, 27);
+            this.QuestionField.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.QuestionField.Name = "QuestionField";
+            this.QuestionField.Size = new System.Drawing.Size(995, 118);
+            this.QuestionField.TabIndex = 0;
+            this.QuestionField.Text = "---";
             // 
             // qNext
             // 
@@ -173,16 +173,16 @@ namespace Client
             this.qNext.UseVisualStyleBackColor = true;
             this.qNext.Click += new System.EventHandler(this.qNext_Click);
             // 
-            // qNum
+            // currentQuestionId
             // 
-            this.qNum.AutoSize = true;
-            this.qNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qNum.Location = new System.Drawing.Point(958, 50);
-            this.qNum.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.qNum.Name = "qNum";
-            this.qNum.Size = new System.Drawing.Size(40, 29);
-            this.qNum.TabIndex = 4;
-            this.qNum.Text = "---";
+            this.currentQuestionId.AutoSize = true;
+            this.currentQuestionId.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.currentQuestionId.Location = new System.Drawing.Point(958, 50);
+            this.currentQuestionId.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.currentQuestionId.Name = "currentQuestionId";
+            this.currentQuestionId.Size = new System.Drawing.Size(40, 29);
+            this.currentQuestionId.TabIndex = 4;
+            this.currentQuestionId.Text = "---";
             // 
             // TestingForm
             // 
@@ -190,7 +190,7 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1046, 488);
-            this.Controls.Add(this.qNum);
+            this.Controls.Add(this.currentQuestionId);
             this.Controls.Add(this.qNext);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -216,13 +216,13 @@ namespace Client
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button qNext;
-        private System.Windows.Forms.Label qF;
-        private System.Windows.Forms.Label qN;
-        private System.Windows.Forms.Label qQ;
+        private System.Windows.Forms.Label clientSurnameLabel;
+        private System.Windows.Forms.Label clientNameLabel;
+        private System.Windows.Forms.Label QuestionField;
         private System.Windows.Forms.RadioButton q1;
         private System.Windows.Forms.RadioButton q4;
         private System.Windows.Forms.RadioButton q3;
         private System.Windows.Forms.RadioButton q2;
-        private System.Windows.Forms.Label qNum;
+        private System.Windows.Forms.Label currentQuestionId;
     }
 }

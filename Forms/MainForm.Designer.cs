@@ -131,6 +131,7 @@ namespace Client
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBox1.DisplayMember = "name";
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBox1.FormattingEnabled = true;
@@ -138,11 +139,13 @@ namespace Client
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(439, 28);
             this.comboBox1.TabIndex = 10;
+            this.comboBox1.ValueMember = "id";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
             this.comboBox2.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBox2.DisplayMember = "name";
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Enabled = false;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -151,6 +154,7 @@ namespace Client
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(439, 28);
             this.comboBox2.TabIndex = 11;
+            this.comboBox2.ValueMember = "id";
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label1

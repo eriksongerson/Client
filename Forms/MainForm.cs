@@ -31,6 +31,7 @@ namespace Client
 
         Subject currentSubject;
         Theme currentTheme;
+        
         public void MainForm_Load(object sender, EventArgs e)
         {
             textBox1.Text = Properties.Settings.Default.ServerIP;
@@ -52,7 +53,7 @@ namespace Client
                     this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
                     foreach (Subject subject in subjects)
                     {
-                        this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Add(subject.Name)));
+                        this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Add(subject)));
                     }
                 });
             }).Start(); // ќн выполнитс€ и сразу уничтожитс€. Ќе нужно контроллировать его жизненный цикл
@@ -60,13 +61,8 @@ namespace Client
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (Subject subject in subjects)
-            {
-                if(subject.Name == comboBox1.Text)
-                {
-                    currentSubject = subject;
-                }
-            }
+            currentSubject = comboBox1.SelectedItem as Subject;
+            QuestionHelper.currentSubject = currentSubject;
 
             Request request = new Request()
             {
@@ -82,7 +78,7 @@ namespace Client
                     this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Clear()));
                     foreach (Theme theme in themes)
                     {
-                        this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Add(theme.Name)));
+                        this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Add(theme)));
                     }
                 });
             }).Start();
@@ -121,7 +117,7 @@ namespace Client
                     TestingForm testingForm = new TestingForm();
                     this.BeginInvoke((MethodInvoker)(() => this.Hide()));
                     if (testingForm.ShowDialog() != DialogResult.OK)
-                        this.BeginInvoke((MethodInvoker)(() => this.Close()));
+                        try { this.BeginInvoke((MethodInvoker)(() => this.Close())); } catch(InvalidOperationException){}
                 });
             }).Start();
         }
@@ -133,15 +129,8 @@ namespace Client
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            foreach (Theme theme in themes)
-            {
-                if (theme.Name == comboBox2.Text)
-                {
-                    currentTheme = theme;
-                }
-            }
-
+            currentTheme = comboBox2.SelectedItem as Theme;
+            QuestionHelper.currentTheme = currentTheme;
             isFill();
         }
 
