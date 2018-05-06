@@ -11,7 +11,7 @@ namespace Client.Helpers
 {
     public static class SocketHelper
     {
-        static string ip = "127.0.0.1";
+        static string ip = "192.168.0.14";
         static int port = 32768;
 
         public delegate void Execute(object sender);

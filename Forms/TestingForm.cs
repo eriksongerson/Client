@@ -60,13 +60,10 @@ namespace Client
         {
             int Choosen = 0;
 
-            if (q1.Checked) Choosen = 1;
-            if (q2.Checked) Choosen = 2;
-            if (q3.Checked) Choosen = 3;
-            if (q4.Checked) Choosen = 4;
-
-            if (Choosen == CurrentQuestion.RightOption)
-                QuestionHelper.RightQuantity++;
+            if (q1.Checked && currentQuestion.Options[0].isRight) QuestionHelper.RightQuantity++;
+            if (q2.Checked && currentQuestion.Options[1].isRight) QuestionHelper.RightQuantity++;
+            if (q3.Checked && currentQuestion.Options[2].isRight) QuestionHelper.RightQuantity++;
+            if (q4.Checked && currentQuestion.Options[3].isRight) QuestionHelper.RightQuantity++;
 
             Answer answer = new Answer()
             {
@@ -105,10 +102,10 @@ namespace Client
             q4.Checked = false;
 
             QuestionField.Text = CurrentQuestion.Name;
-            q1.Text = CurrentQuestion.FirstOption;
-            q2.Text = CurrentQuestion.SecondOption;
-            q3.Text = CurrentQuestion.ThirdOption;
-            q4.Text = CurrentQuestion.FourthOption;
+            q1.Text = CurrentQuestion.Options[0];
+            q2.Text = CurrentQuestion.Options[1];
+            q3.Text = CurrentQuestion.Options[2];
+            q4.Text = CurrentQuestion.Options[3];
             currentQuestionId.Text = $"{QuestionHelper.currentQuestionId}"; 
         }
     }
