@@ -12,6 +12,7 @@ namespace Client.Models
         int id_theme;
         string name;
         List<Option> options;
+        Type type;
 
         public int Id
         {
@@ -38,15 +39,21 @@ namespace Client.Models
             set { this.options = value; }
             get { return this.options; }
         }
+        public Type Type
+        {
+            set { this.type = value; }
+            get { return this.type; }
+        }
 
         public Question() { }
-        public Question(int id, int id_subject, int id_theme, string name, List<Option> options)
+        public Question(int id, int id_subject, int id_theme, string name, List<Option> options, Type type)
         {
             this.id = id;
             this.id_subject = id_subject;
             this.id_theme = id_theme;
             this.name = name;
             this.options = options;
+            this.type = type;
         }
 
     }

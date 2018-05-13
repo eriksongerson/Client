@@ -1,19 +1,13 @@
 using System;
-//using System.Collections.Generic;
-using System.ComponentModel;
-//using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
 using System.Threading;
+using System.Collections.Generic;
 
 using Client.Helpers;
 using Client.Models;
 using Newtonsoft.Json;
 
-namespace Client
+namespace Client.Forms
 {
     public partial class TestingForm : Form
     {
@@ -56,20 +50,102 @@ namespace Client
             InitializeComponent();
         }
 
+        private void CheckAnswers()
+        {
+            singleGroupBox.Visible = false;
+            multipleGroupBox.Visible = false;
+            fillingGroupBox.Visible = false;
+
+            Models.Type type = CurrentQuestion.Type;
+            List<Option> options = CurrentQuestion.Options;
+
+            switch (type)
+            {
+                case Models.Type.single:
+                    {
+
+                        if(singleChoiceFirstOptionRadioButton.Checked && options[0].isRight 
+                            || singleChoiceSecondOptionRadioButton.Checked && options[1].isRight
+                            || singleChoiceThirdOptionRadioButton.Checked && options[2].isRight
+                            || singleChoiceFourthOptionRadioButton.Checked && options[3].isRight)
+                            QuestionHelper.RightQuantity++;
+
+                        break;
+                    }
+                case Models.Type.multiple:
+                    {
+                        if(multipleChoiceFirstOptionCheckBox.Checked == options[0].isRight
+                            && multipleChoiceSecondOptionCheckBox.Checked == options[1].isRight 
+                            && multipleChoiceThirdOptionCheckBox.Checked == options[2].isRight
+                            && multipleChoiceFourthOptionCheckBox.Checked == options[3].isRight)
+                            QuestionHelper.RightQuantity++;
+
+                        break;
+                    }
+                case Models.Type.filling:
+                    {
+                        if(fillingOptionTextBox.Text.ToLower() == options[0].option.ToLower())
+                            QuestionHelper.RightQuantity++;
+                        
+                        break;
+                    }
+            }
+        }
+
+        private List<Option> GetChoosenOptions()
+        {
+            List<Option> choosenOptions = new List<Option>();
+
+            Models.Type type = CurrentQuestion.Type;
+            List<Option> options = CurrentQuestion.Options;
+
+            switch (type)
+            {
+                case Models.Type.single:
+                    {
+                        if(singleChoiceFirstOptionRadioButton.Checked) choosenOptions.Add(options[0]);
+                        if(singleChoiceSecondOptionRadioButton.Checked) choosenOptions.Add(options[1]);
+                        if(singleChoiceThirdOptionRadioButton.Checked) choosenOptions.Add(options[2]);
+                        if(singleChoiceFourthOptionRadioButton.Checked) choosenOptions.Add(options[3]);
+
+                        break;
+                    }
+                case Models.Type.multiple:
+                    {
+                        if(multipleChoiceFirstOptionCheckBox.Checked) choosenOptions.Add(options[0]);
+                        if(multipleChoiceSecondOptionCheckBox.Checked) choosenOptions.Add(options[1]);
+                        if(multipleChoiceThirdOptionCheckBox.Checked) choosenOptions.Add(options[2]);
+                        if(multipleChoiceFourthOptionCheckBox.Checked) choosenOptions.Add(options[3]);
+
+                        break;
+                    }
+                case Models.Type.filling:
+                    {
+                        Option option = new Option()
+                        {
+                            option = fillingOptionTextBox.Text,
+                        };
+                        choosenOptions.Add(option);
+
+                        break;
+                    }
+            }
+
+            return choosenOptions;
+        }
+
         private void qNext_Click(object sender, EventArgs e)
         {
-            int Choosen = 0;
-
-            if (q1.Checked && currentQuestion.Options[0].isRight) QuestionHelper.RightQuantity++;
-            if (q2.Checked && currentQuestion.Options[1].isRight) QuestionHelper.RightQuantity++;
-            if (q3.Checked && currentQuestion.Options[2].isRight) QuestionHelper.RightQuantity++;
-            if (q4.Checked && currentQuestion.Options[3].isRight) QuestionHelper.RightQuantity++;
+            CheckAnswers();
+            List<Option> choosen = GetChoosenOptions();
 
             Answer answer = new Answer()
             {
                 question = currentQuestion,
-                choosen = Choosen,
+                choosen = choosen,
             };
+
+            QuestionHelper.answers.Add(answer);
 
             Request request = new Request()
             {
@@ -94,18 +170,65 @@ namespace Client
             clientSurnameLabel.Text = QuestionHelper.client.surname;
         }
 
+        private void ClearAndHide()
+        {
+            singleChoiceFirstOptionRadioButton.Text = "";
+            singleChoiceSecondOptionRadioButton.Text = "";
+            singleChoiceThirdOptionRadioButton.Text = "";
+            singleChoiceFourthOptionRadioButton.Text = "";
+
+            multipleChoiceFirstOptionCheckBox.Text = "";
+            multipleChoiceSecondOptionCheckBox.Text = "";
+            multipleChoiceThirdOptionCheckBox.Text = "";
+            multipleChoiceFourthOptionCheckBox.Text = "";
+
+            fillingOptionTextBox.Text = "";
+
+            singleGroupBox.Visible = false;
+            multipleGroupBox.Visible = false;
+            fillingGroupBox.Visible = false;
+        }
+
         void Visual()
         {
-            q1.Checked = false;
-            q2.Checked = false;
-            q3.Checked = false;
-            q4.Checked = false;
+            ClearAndHide();
+
+            Models.Type type = CurrentQuestion.Type;
+            List<Option> options = CurrentQuestion.Options;
+
+            switch (type)
+            {
+                case Models.Type.single:
+                    {
+                        singleGroupBox.Visible = true;
+
+                        singleChoiceFirstOptionRadioButton.Text = options[0];
+                        singleChoiceSecondOptionRadioButton.Text = options[1];
+                        singleChoiceThirdOptionRadioButton.Text = options[2];
+                        singleChoiceFourthOptionRadioButton.Text = options[3];
+
+                        break;
+                    }
+                case Models.Type.multiple:
+                    {
+                        multipleGroupBox.Visible = true;
+                        
+                        multipleChoiceFirstOptionCheckBox.Text = options[0];
+                        multipleChoiceSecondOptionCheckBox.Text = options[1];
+                        multipleChoiceThirdOptionCheckBox.Text = options[2];
+                        multipleChoiceFourthOptionCheckBox.Text = options[3];
+
+                        break;
+                    }
+                case Models.Type.filling:
+                    {
+                        fillingGroupBox.Visible = true;
+
+                        break;
+                    }
+            }
 
             QuestionField.Text = CurrentQuestion.Name;
-            q1.Text = CurrentQuestion.Options[0];
-            q2.Text = CurrentQuestion.Options[1];
-            q3.Text = CurrentQuestion.Options[2];
-            q4.Text = CurrentQuestion.Options[3];
             currentQuestionId.Text = $"{QuestionHelper.currentQuestionId}"; 
         }
     }

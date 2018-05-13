@@ -1,4 +1,4 @@
-namespace Client
+namespace Client.Forms
 {
     partial class FinishTestingForm
     {
@@ -37,16 +37,17 @@ namespace Client
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.mistakesButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // qExit
             // 
             this.qExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.qExit.Location = new System.Drawing.Point(323, 261);
+            this.qExit.Location = new System.Drawing.Point(280, 305);
             this.qExit.Margin = new System.Windows.Forms.Padding(6);
             this.qExit.Name = "qExit";
-            this.qExit.Size = new System.Drawing.Size(186, 56);
+            this.qExit.Size = new System.Drawing.Size(235, 56);
             this.qExit.TabIndex = 0;
             this.qExit.Text = "ВЫХОД";
             this.qExit.UseVisualStyleBackColor = true;
@@ -141,12 +142,25 @@ namespace Client
             this.label4.TabIndex = 6;
             this.label4.Text = "---";
             // 
+            // mistakesButton
+            // 
+            this.mistakesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mistakesButton.Location = new System.Drawing.Point(15, 305);
+            this.mistakesButton.Margin = new System.Windows.Forms.Padding(6);
+            this.mistakesButton.Name = "mistakesButton";
+            this.mistakesButton.Size = new System.Drawing.Size(235, 56);
+            this.mistakesButton.TabIndex = 7;
+            this.mistakesButton.Text = "Просмотреть ошибки";
+            this.mistakesButton.UseVisualStyleBackColor = true;
+            this.mistakesButton.Click += new System.EventHandler(this.mistakesButton_Click);
+            // 
             // FinishTestingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(524, 331);
+            this.ClientSize = new System.Drawing.Size(524, 376);
+            this.Controls.Add(this.mistakesButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -180,5 +194,6 @@ namespace Client
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button mistakesButton;
     }
 }

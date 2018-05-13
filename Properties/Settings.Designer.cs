@@ -22,14 +22,5 @@ namespace Client.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
-        public string ServerIP {
-            get {
-                return ((string)(this["ServerIP"]));
-            }
-        }
     }
 }

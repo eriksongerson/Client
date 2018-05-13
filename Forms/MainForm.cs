@@ -1,8 +1,5 @@
 using System;
-using System.Text;
 using System.Threading;
-using System.Net;
-using System.Net.Sockets;
 using System.Windows.Forms;
 
 using Client.Models;
@@ -11,7 +8,7 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-namespace Client
+namespace Client.Forms
 {
     public partial class MainForm : Form
     {
@@ -34,7 +31,7 @@ namespace Client
         
         public void MainForm_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Properties.Settings.Default.ServerIP;
+            //textBox1.Text = Properties.Settings.Default.ServerIP;
 
             Request request = new Request()
             {

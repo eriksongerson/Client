@@ -45,6 +45,8 @@ namespace Client.Helpers
         public static int TotalQuestions = 0;
         public static int currentQuestionId = 0;
 
+        public static List<Answer> answers = new List<Answer>();
+
         //public static string Get_PCname()
         //{
         //    return PCname;

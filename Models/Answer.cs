@@ -1,10 +1,12 @@
-﻿namespace Client.Models
+﻿using System.Collections.Generic;
+
+namespace Client.Models
 {
     public class Answer
     {
 
         public Question question;
-        public int choosen;
+        public List<Option> choosen;
 
     }
 }

@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using Client.Helpers;
 using Client.Models;
 
-namespace Client
+namespace Client.Forms
 {
     public partial class FinishTestingForm : Form
     {
@@ -76,6 +76,18 @@ namespace Client
             };
 
             new Thread(() => SocketHelper.DoRequest(request, null)).Start();
+
+            if(QuestionHelper.RightQuantity == QuestionHelper.TotalQuestions)
+            {
+                mistakesButton.Enabled = false;
+            }
+        }
+
+        private void mistakesButton_Click(object sender, EventArgs e)
+        {
+            MistakesForm mistakesForm = new MistakesForm();
+            if(mistakesForm.ShowDialog() != DialogResult.OK)
+                Close();
         }
     }
 }

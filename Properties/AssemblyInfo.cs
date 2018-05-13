@@ -1,16 +1,17 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test_OS")]
+[assembly: AssemblyTitle("Клиент системы тестирования")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Senchov K.V.")]
-[assembly: AssemblyProduct("Test_OS")]
-[assembly: AssemblyCopyright("Copyright © K.V. Senchov, 2012")]
+[assembly: AssemblyCompany("Zolotov Nikita")]
+[assembly: AssemblyProduct("Client")]
+[assembly: AssemblyCopyright("©zn, 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,3 +32,5 @@ using System.Runtime.InteropServices;
 //
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("ru-RU")]
+
