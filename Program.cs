@@ -1,6 +1,8 @@
 using System;
 using System.Windows.Forms;
 
+using Client.Forms;
+
 namespace Client
 {
     static class Program

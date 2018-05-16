@@ -1,7 +1,5 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Net.Sockets;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using Client.Models;
 using System.Net;
@@ -11,7 +9,7 @@ namespace Client.Helpers
 {
     public static class SocketHelper
     {
-        static string ip = "192.168.0.14";
+        static string ip = Properties.Settings.Default.IP;
         static int port = 32768;
 
         public delegate void Execute(object sender);

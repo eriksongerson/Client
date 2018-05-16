@@ -9,6 +9,47 @@ namespace Client.Forms
 {
     public partial class MistakesForm : Form
     {
+
+        public class AnswerVisualization : GroupBox
+        {
+            Answer Answer;
+
+            Label questionLabel;
+            Label firstOptionLabel;
+            Label secondOptionLabel;
+            Label thirdOptionLabel;
+            Label fourthOptionLabel;
+
+            Label fillingOptionLabel;
+            Label yourFillingOptionAnswerLabel;
+
+            public AnswerVisualization(Answer answer) : base()
+            {
+                this.Answer = answer;
+
+                this.Text = "";
+                questionLabel.Text = Answer.question.Name;
+
+                var options = Answer.question.Options;
+
+                switch (Answer.question.Type)
+                {
+                    case Models.Type.single:
+                    case Models.Type.multiple:
+
+                        firstOptionLabel.Text = options[0].option;
+                        secondOptionLabel.Text = options[1].option;
+                        thirdOptionLabel.Text = options[2].option;
+                        fourthOptionLabel.Text = options[3].option;
+
+                        break;
+                    case Models.Type.filling:
+                        fillingOptionLabel.Text = options[0].option;
+                        break;
+                }
+            }
+        }
+
         public MistakesForm()
         {
             InitializeComponent();
@@ -19,7 +60,11 @@ namespace Client.Forms
             List<Answer> answers = QuestionHelper.answers;
             List<Answer> wrongAnswers = GetWrongAnswers(answers);
 
-            
+            foreach (var item in wrongAnswers)
+            {
+                AnswerVisualization answerVisualization = new AnswerVisualization(item);
+                flowLayoutPanel1.Controls.Add(answerVisualization);
+            }
 
         }
 

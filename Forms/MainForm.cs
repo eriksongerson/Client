@@ -31,7 +31,7 @@ namespace Client.Forms
         
         public void MainForm_Load(object sender, EventArgs e)
         {
-            //textBox1.Text = Properties.Settings.Default.ServerIP;
+            textBox1.Text = Properties.Settings.Default.IP;
 
             Request request = new Request()
             {
@@ -157,8 +157,9 @@ namespace Client.Forms
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.ServerIP = textBox1.Text;
+            //Properties.Settings.Default.IP = textBox1.Text;
             //Properties.Settings.Default.Save();
+            //SocketHelper.IPChanged();
         }
     }
 }

@@ -52,6 +52,10 @@ namespace Client.Helpers
                     {
                         break;
                     }
+                case "problem":
+                    {
+                        break;
+                    }
                 default:
                     break;
             }

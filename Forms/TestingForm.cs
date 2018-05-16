@@ -74,6 +74,7 @@ namespace Client.Forms
                     }
                 case Models.Type.multiple:
                     {
+                        // TODO: Сделать возможным частичный ответ на вопрос
                         if(multipleChoiceFirstOptionCheckBox.Checked == options[0].isRight
                             && multipleChoiceSecondOptionCheckBox.Checked == options[1].isRight 
                             && multipleChoiceThirdOptionCheckBox.Checked == options[2].isRight
