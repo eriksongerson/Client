@@ -15,52 +15,59 @@ namespace Client.Helpers
         public static void Handle(string stringRequest, Execute execute)
         {
             Response response = JsonConvert.DeserializeObject<Response>(stringRequest);
+            try
+                {
+                    switch (response.response)
+                    {
+                        case "connect" :
+                            {
+                                break;
+                            }
+                        case "disconnect" :
+                            {
+                                break;
+                            }
+                        case "getSubjects" :
+                            {
+                                List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(response.body);
+                                execute(subjects);
+                                break;
+                            }
+                        case "getThemes" :
+                            {
+                                List<Theme> themes = JsonConvert.DeserializeObject<List<Theme>>(response.body);
+                                execute(themes);
+                                break;
+                            }
+                        case "getQuestions" :
+                            {
+                                List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(response.body);
+                                execute(questions);
+                                break;
+                            }
+                        case "answer" :
+                            {
+                                break;
+                            }
+                        case "done" :
+                            {
+                                break;
+                            }
+                        case "problem":
+                            {
+                                break;
+                            }
+                        default:
+                            break;
+                    }
 
-            switch (response.response)
-            {
-                case "connect" :
-                    {
-                        break;
-                    }
-                case "disconnect" :
-                    {
-                        break;
-                    }
-                case "getSubjects" :
-                    {
-                        List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(response.body);
-                        execute(subjects);
-                        break;
-                    }
-                case "getThemes" :
-                    {
-                        List<Theme> themes = JsonConvert.DeserializeObject<List<Theme>>(response.body);
-                        execute(themes);
-                        break;
-                    }
-                case "getQuestions" :
-                    {
-                        List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(response.body);
-                        execute(questions);
-                        break;
-                    }
-                case "answer" :
-                    {
-                        break;
-                    }
-                case "done" :
-                    {
-                        break;
-                    }
-                case "problem":
-                    {
-                        break;
-                    }
-                default:
-                    break;
+                }
+                catch (NullReferenceException)
+                {
+                    //TODO: НЕ ОСТАВЛЯТЬ ПУСТЫМ
+                }   
             }
 
-        }
 
     }
 }

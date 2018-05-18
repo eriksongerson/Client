@@ -1,10 +1,11 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using System.Net;
+using System.Collections.Generic;
 
 using Client.Models;
 using Client.Helpers;
-using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
@@ -12,12 +13,6 @@ namespace Client.Forms
 {
     public partial class MainForm : Form
     {
-
-        //Client client = new Client();
-
-        private int port = 12345;
-        private static string InputMessage = "";
-
         public MainForm()
         {
             InitializeComponent();
@@ -155,11 +150,29 @@ namespace Client.Forms
             isFill();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox1_Leave(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.IP = textBox1.Text;
-            //Properties.Settings.Default.Save();
-            //SocketHelper.IPChanged();
+            string line = textBox1.Text;
+            var arr = line.Split('.');
+            if (arr.Length != 4)
+            {
+                MessageBox.Show("Некорректный IP адрес", "Некорректный IP адрес2" ,MessageBoxButtons.OK);
+                textBox1.Select();
+                return;
+            }
+            foreach (var item in arr)
+            {
+                if(Int32.Parse(item) > 256)
+                {
+                    MessageBox.Show("Некорректный IP адрес", "Некорректный IP адрес2" ,MessageBoxButtons.OK);
+                    textBox1.Select();
+                    return;
+                }
+            }
+
+            Properties.Settings.Default.IP = line;
+            Properties.Settings.Default.Save();
+            SocketHelper.NotificateIpChanged();
         }
     }
 }

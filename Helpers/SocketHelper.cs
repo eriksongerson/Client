@@ -9,14 +9,19 @@ namespace Client.Helpers
 {
     public static class SocketHelper
     {
-        static string ip = Properties.Settings.Default.IP;
+        static public string ip = Properties.Settings.Default.IP;
         static int port = 32768;
 
         public delegate void Execute(object sender);
 
+        public static void NotificateIpChanged()
+        {
+            ip = Properties.Settings.Default.IP;
+        }
+
+        static TcpClient tcpClient = null;
         public static void DoRequest(Request request, Execute execute)
         {
-            TcpClient tcpClient = null;
             try
             {
                 tcpClient = new TcpClient(ip, port);
@@ -44,7 +49,7 @@ namespace Client.Helpers
             catch(SocketException)
             {
                 Thread thread = Thread.CurrentThread;
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
                 DoRequest(request, execute);
             }
             finally 

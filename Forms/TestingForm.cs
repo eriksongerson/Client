@@ -11,13 +11,6 @@ namespace Client.Forms
 {
     public partial class TestingForm : Form
     {
-
-        //TODO: 0-23="2"  24-31="3"  32-40="4"  41-46="5";
-        //TODO: InactiveCaptionText;
-
-        int Number = 0;
-        Thread WT = null;
-
         private Question currentQuestion;
         Question CurrentQuestion
         {

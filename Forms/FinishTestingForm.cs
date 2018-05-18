@@ -86,8 +86,7 @@ namespace Client.Forms
         private void mistakesButton_Click(object sender, EventArgs e)
         {
             MistakesForm mistakesForm = new MistakesForm();
-            if(mistakesForm.ShowDialog() != DialogResult.OK)
-                Close();
+            mistakesForm.ShowDialog();
         }
     }
 }
