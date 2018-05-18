@@ -43,9 +43,11 @@ namespace Client.Forms
                 this.Controls.Add(fillingOptionLabel);
                 this.Controls.Add(yourFillingOptionAnswerLabel);
 
-                this.ParentChanged += new EventHandler((sender, e) => {
-                    this.Width = this.Parent.ClientSize.Width;
-                });
+                //this.ParentChanged += new EventHandler((sender, e) => {
+                //    this.Width = this.Parent.ClientSize.Width;
+                //});
+
+                this.Width = 840;
 
                 // Настройка внутренних элементов:
                 #region settingElements
@@ -63,9 +65,10 @@ namespace Client.Forms
                     thirdOptionLabel.Width =
                     fourthOptionLabel.Width =
                     fillingOptionLabel.Width =
-                    yourFillingOptionAnswerLabel.Width = this.ClientSize.Width;
+                    yourFillingOptionAnswerLabel.Width = 804;
 
                 // Высота:
+                this.Height = 272;
                 questionLabel.Height = 93;
                 firstOptionLabel.Height = 
                     secondOptionLabel.Height = 
