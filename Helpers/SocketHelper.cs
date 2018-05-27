@@ -4,10 +4,11 @@ using Newtonsoft.Json;
 using Client.Models;
 using System.Net;
 using System.Threading;
+using System.IO;
 
 namespace Client.Helpers
 {
-    public static class SocketHelper
+    public class SocketHelper
     {
         static public string ip = Properties.Settings.Default.IP;
         static int port = 32768;
@@ -19,11 +20,12 @@ namespace Client.Helpers
             ip = Properties.Settings.Default.IP;
         }
 
-        static TcpClient tcpClient = null;
-        public static void DoRequest(Request request, Execute execute)
+        public void DoRequest(Request request, Execute execute)
         {
             try
             {
+                TcpClient tcpClient = null;
+                
                 tcpClient = new TcpClient(ip, port);
             
                 NetworkStream networkStream = tcpClient.GetStream();
@@ -34,7 +36,7 @@ namespace Client.Helpers
                 networkStream.Write(data, 0, data.Length);
             
                 // получаем ответ
-                data = new byte[256]; // буфер для получаемых данных
+                data = new byte[1_048_576]; // буфер для получаемых данных (1МБ)
                 StringBuilder builder = new StringBuilder();
                 int bytes = 0;
                 do
@@ -44,30 +46,42 @@ namespace Client.Helpers
                 }
                 while (networkStream.DataAvailable);
 
-                ResponseHandler.Handle(builder.ToString(), (sender) => execute(sender));
+                new ResponseHandler().Handle(builder.ToString(), (sender) => execute(sender));
+
+                tcpClient.Close();
             }
             catch(SocketException)
             {
-                Thread thread = Thread.CurrentThread;
+                //tcpClient?.Close(); 
                 Thread.Sleep(1000);
                 DoRequest(request, execute);
             }
-            finally 
+            catch (IOException)
             {
-                if (tcpClient != null) tcpClient.Close();
+                //tcpClient?.Close();
+                Thread.Sleep(1000);
+                DoRequest(request, execute);
             }
         }
 
         public static string GetLocalIPAddress()
         {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            //var host = Dns.GetHostEntry(Dns.GetHostName());
+            var adresses = Dns.GetHostAddresses(Dns.GetHostName());
+            foreach (var item in adresses)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                if(item.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    return ip.ToString();
+                    return item.ToString();
                 }
             }
+            //foreach (var ip in host.AddressList)
+            //{
+            //    if (ip.AddressFamily == AddressFamily.InterNetwork)
+            //    {
+            //        return ip.ToString();
+            //    }
+            //}
             return null;
         }
     }

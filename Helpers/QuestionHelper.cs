@@ -11,6 +11,7 @@ namespace Client.Helpers
         public static Models.Client client = new Models.Client()
         {
             ip = SocketHelper.GetLocalIPAddress(),
+            pc = Environment.MachineName,
         };
 
         private static List<Question> questions = new List<Question>();

@@ -35,9 +35,6 @@ namespace Client.Forms
             }
         }
 
-        private static bool isAnswerSent = false;
-        private static string message = null;
-
         public TestingForm()
         {
             InitializeComponent();
@@ -150,7 +147,8 @@ namespace Client.Forms
 
             new Thread(() => 
             {
-                SocketHelper.DoRequest(request, null);
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(request, null);
             }).Start(); 
 
              CurrentQuestion = QuestionHelper.GetNextQuestion();
@@ -162,6 +160,7 @@ namespace Client.Forms
 
             clientNameLabel.Text = QuestionHelper.client.name;
             clientSurnameLabel.Text = QuestionHelper.client.surname;
+            totalQuetionsLabel.Text = $"{ QuestionHelper.TotalQuestions }";
         }
 
         private void ClearAndHide()
@@ -223,7 +222,7 @@ namespace Client.Forms
             }
 
             QuestionField.Text = CurrentQuestion.Name;
-            currentQuestionId.Text = $"{QuestionHelper.currentQuestionId}"; 
+            currentQuestionId.Text = $"{ QuestionHelper.currentQuestionId + 1 }";
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using System.Net;
 using System.Collections.Generic;
 
 using Client.Models;
@@ -20,15 +19,39 @@ namespace Client.Forms
 
         List<Subject> subjects;
         List<Theme> themes;
+        List<Group> groups;
 
         Subject currentSubject;
         Theme currentTheme;
-        
+
         public void MainForm_Load(object sender, EventArgs e)
         {
             textBox1.Text = Properties.Settings.Default.IP;
 
-            Request request = new Request()
+            Request GroupRequest = new Request()
+            {
+                request = "getGroups",
+                client = QuestionHelper.client,
+                body = null,
+            };
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(GroupRequest, (returned) =>
+                {
+                    // эта лямбда-функция для того, чтобы после запроса и его обработки выполнилось какое-либо событие
+                    // она передаётся дальше
+                    groups = returned as List<Group>;
+                    this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
+                    foreach (Group group in groups)
+                    {
+                        this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Add(group)));
+                    }
+                });
+            }).Start();
+
+            Request SubjectsRequest = new Request()
             {
                 request = "getSubjects",
                 client = QuestionHelper.client,
@@ -38,7 +61,8 @@ namespace Client.Forms
             // Анонимный поток
             new Thread(() => 
             {
-                SocketHelper.DoRequest(request, (returned) => {
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(SubjectsRequest, (returned) => {
                     // эта лямбда-функция для того, чтобы после запроса и его обработки выполнилось какое-либо событие
                     // она передаётся дальше
                     subjects = returned as List<Subject>;
@@ -65,7 +89,8 @@ namespace Client.Forms
 
             new Thread(() => 
             {
-                SocketHelper.DoRequest(request, (returned) => {
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(request, (returned) => {
                     themes = returned as List<Theme>;
                     this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Clear()));
                     foreach (Theme theme in themes)
@@ -101,7 +126,8 @@ namespace Client.Forms
             };
 
             new Thread(() => {
-                SocketHelper.DoRequest(request, (returned) => {
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(request, (returned) => {
                     List<Question> questions = returned as List<Question>;
                     QuestionHelper.Questions = questions;
 

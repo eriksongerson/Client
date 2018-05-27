@@ -7,12 +7,12 @@ using Client.Models;
 
 namespace Client.Helpers
 {
-    public static class ResponseHandler
+    public class ResponseHandler
     {
 
         public delegate void Execute(object sender);
 
-        public static void Handle(string stringRequest, Execute execute)
+        public void Handle(string stringRequest, Execute execute)
         {
             Response response = JsonConvert.DeserializeObject<Response>(stringRequest);
             try
@@ -43,6 +43,12 @@ namespace Client.Helpers
                             {
                                 List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(response.body);
                                 execute(questions);
+                                break;
+                            }
+                        case "getGroups":
+                            {
+                                List<Group> groups = JsonConvert.DeserializeObject<List<Group>>(response.body);
+                                execute(groups);
                                 break;
                             }
                         case "answer" :

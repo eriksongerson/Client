@@ -1,12 +1,11 @@
-﻿using System.IO;
-using System.Windows.Forms;
-
-namespace Client.Models
+﻿namespace Client.Models
 {
     public class Client
     {
         public string ip;
+        public string pc;
         public string surname;
         public string name;
+        public Group group;
     }
 }

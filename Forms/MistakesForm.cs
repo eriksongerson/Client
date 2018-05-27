@@ -47,16 +47,10 @@ namespace Client.Forms
                 //    this.Width = this.Parent.ClientSize.Width;
                 //});
 
-                this.Width = 840;
+                this.Width = 816;
 
                 // Настройка внутренних элементов:
                 #region settingElements
-
-                // Поля элемента:
-                Padding padding = this.Margin;
-                padding.Left = padding.Right = padding.Bottom = 12;
-                padding.Top = 32;
-                this.Margin = padding;
 
                 // Ширина:
                 questionLabel.Width =
@@ -65,7 +59,7 @@ namespace Client.Forms
                     thirdOptionLabel.Width =
                     fourthOptionLabel.Width =
                     fillingOptionLabel.Width =
-                    yourFillingOptionAnswerLabel.Width = 804;
+                    yourFillingOptionAnswerLabel.Width = 800;
 
                 // Высота:
                 this.Height = 272;
@@ -152,58 +146,56 @@ namespace Client.Forms
         private void MistakesForm_Load(object sender, EventArgs e)
         {
             List<Answer> answers = QuestionHelper.answers;
-            List<Answer> wrongAnswers = GetWrongAnswers(answers);
+            //List<Answer> wrongAnswers = GetWrongAnswers(answers);
 
-            foreach (var item in wrongAnswers)
+            foreach (var item in answers)
             {
                 AnswerVisualization answerVisualization = new AnswerVisualization(item);
                 flowLayoutPanel1.Controls.Add(answerVisualization);
             }
-
         }
 
-        private List<Answer> GetWrongAnswers(List<Answer> answers)
-        {
-            List<Answer> wrongAnswers = new List<Answer>();
+        //private List<Answer> GetWrongAnswers(List<Answer> answers)
+        //{
+        //    List<Answer> wrongAnswers = new List<Answer>();
 
-            foreach (Answer answer in answers)
-            {
-                switch (answer.question.Type)
-                {
-                    case Models.Type.single:
-                        {
-                            foreach (Option option in answer.question.Options)
-                            {
-                                if(option == answer.choosen[0])
-                                {
-                                    wrongAnswers.Add(answer);
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    case Models.Type.multiple:
-                        {
-                            if(!answer.choosen.Equals(answer.question.Options)){
-                                wrongAnswers.Add(answer);
-                                break;
-                            }
-                            break;
-                        }
-                    case Models.Type.filling:
-                        {
-                            if(answer.choosen[0].option.ToLower().TrimEnd().TrimStart() == answer.question.Options[0].option.ToLower().TrimEnd().TrimStart())
-                            {
-                                wrongAnswers.Add(answer);
-                                break;
-                            }
-                            break;
-                        }
-                }
-            }
+        //    foreach (Answer answer in answers)
+        //    {
+        //        switch (answer.question.Type)
+        //        {
+        //            case Models.Type.single:
+        //                {
+        //                    foreach (Option option in answer.question.Options)
+        //                    {
+        //                        if(option == answer.choosen[0])
+        //                        {
+        //                            wrongAnswers.Add(answer);
+        //                            break;
+        //                        }
+        //                    }
+        //                    break;
+        //                }
+        //            case Models.Type.multiple:
+        //                {
+        //                    if(!answer.choosen.Equals(answer.question.Options)){
+        //                        wrongAnswers.Add(answer);
+        //                        break;
+        //                    }
+        //                    break;
+        //                }
+        //            case Models.Type.filling:
+        //                {
+        //                    if(answer.choosen[0].option.ToLower().TrimEnd().TrimStart() == answer.question.Options[0].option.ToLower().TrimEnd().TrimStart())
+        //                    {
+        //                        wrongAnswers.Add(answer);
+        //                        break;
+        //                    }
+        //                    break;
+        //                }
+        //        }
+        //    }
 
-            return wrongAnswers;
-        }
-
+        //    return wrongAnswers;
+        //}
     }
 }

@@ -1,13 +1,6 @@
 using System;
-//using System.Collections.Generic;
-using System.ComponentModel;
-//using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using System.Net.Sockets;
-using System.Net;
 
 using Newtonsoft.Json;
 using Client.Helpers;
@@ -25,12 +18,26 @@ namespace Client.Forms
             public int mark;
         }
         
-        enum Mark : int
+        public enum Mark : int
         {
             Perfect = 5,
             Good = 4,
             Normal = 3,
             Bad = 2
+        }
+
+        public Mark GetMark(double Percent)
+        {
+            Mark mark = Mark.Bad;
+
+            if (Percent >= 0.5 && Percent < 0.75)
+                mark = Mark.Normal;
+            if (Percent >= 0.75 && Percent < 0.875)
+                mark = Mark.Good;
+            if (Percent >= 0.875 && Percent <= 100)
+                mark = Mark.Perfect;
+
+            return mark;
         }
 
         public FinishTestingForm()
@@ -50,14 +57,7 @@ namespace Client.Forms
             qResult.Text = QuestionHelper.RightQuantity.ToString();
 
             double Percent = (double)QuestionHelper.RightQuantity / (double)QuestionHelper.TotalQuestions;
-            Mark mark = Mark.Bad;
-
-            if (Percent >= 0.5 && Percent > 0.75)
-                mark = Mark.Normal;
-            if (Percent >= 0.75 && Percent < 0.875)
-                mark = Mark.Good;
-            if (Percent >= 0.875 && Percent <= 100)
-                mark = Mark.Perfect;
+            Mark mark = GetMark(Percent);
 
             label4.Text = $"{(int)mark}";
 
@@ -75,7 +75,10 @@ namespace Client.Forms
                 body = JsonConvert.SerializeObject(disciplineWithMark),
             };
 
-            new Thread(() => SocketHelper.DoRequest(request, null)).Start();
+            new Thread(() => {
+                Thread.CurrentThread.IsBackground = true;
+                new SocketHelper().DoRequest(request, null);
+            }).Start();
 
             if(QuestionHelper.RightQuantity == QuestionHelper.TotalQuestions)
             {
