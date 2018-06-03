@@ -8,6 +8,8 @@ namespace Client.Helpers
 {
     public static class QuestionHelper
     {
+        public static bool isTesting = false;
+
         public static Models.Client client = new Models.Client()
         {
             ip = SocketHelper.GetLocalIPAddress(),

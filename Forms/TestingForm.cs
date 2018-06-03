@@ -157,6 +157,7 @@ namespace Client.Forms
         private void TestingForm_Load(object sender, EventArgs e)
         {
             CurrentQuestion = QuestionHelper.GetNextQuestion();
+            QuestionHelper.isTesting = true;
 
             clientNameLabel.Text = QuestionHelper.client.name;
             clientSurnameLabel.Text = QuestionHelper.client.surname;

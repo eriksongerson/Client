@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="spinnerEighthFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-8-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerFifthFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-5-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerFirstFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-1-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerFourthFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-4-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerSecondFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-2-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerSeventhFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-7-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerSixthFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-6-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="spinnerThirdFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\icons8-спиннер,-кадр-3-100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

@@ -21,10 +21,12 @@ namespace Client.Helpers
                     {
                         case "connect" :
                             {
+                                execute(null);
                                 break;
                             }
                         case "disconnect" :
                             {
+                                execute(null);
                                 break;
                             }
                         case "getSubjects" :
@@ -53,14 +55,17 @@ namespace Client.Helpers
                             }
                         case "answer" :
                             {
+                                execute(null);
                                 break;
                             }
                         case "done" :
                             {
+                                execute(null);
                                 break;
                             }
                         case "problem":
                             {
+                                execute(null);
                                 break;
                             }
                         default:
