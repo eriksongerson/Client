@@ -33,7 +33,6 @@ namespace Client.Helpers
                             client = QuestionHelper.client,
                             body = null,
                         };
-                        // TODO: Нужен спиннер
                         MessageBox.Show("Вы были отключены от сервера");
                         new Thread(() =>
                         {
@@ -119,7 +118,6 @@ namespace Client.Helpers
         private static TcpListener tcpListener = new TcpListener(IPAddress.Parse(GetLocalIPAddress()), listenerPort);
         public static void StartListener()
         {
-            // TODO: написать прослушиватель сообщений об отключении от сервера.
             tcpListener.Start();
             new Thread(() => 
             {
@@ -157,7 +155,7 @@ namespace Client.Helpers
 
                             Response response = new Response()
                             {
-                                response = "disconnect",
+                                response = request.request,
                                 body = "OK",
                             };
 
@@ -166,10 +164,6 @@ namespace Client.Helpers
                             buffer = Encoding.Unicode.GetBytes(message);
                             networkStream.Write(buffer, 0, buffer.Length);
                         }
-                        //catch (Exception ex)
-                        //{
-                        //    MessageBox.Show(ex.Message);
-                        //}
                         finally
                         {
                             networkStream.Close();
@@ -178,7 +172,7 @@ namespace Client.Helpers
                     }
                     catch (SocketException)
                     {
-                        // TODO: не оставлять пустым
+                        continue;
                     }
                 }
                 tcpListener.Stop();

@@ -64,11 +64,12 @@ namespace Client.Forms
             this.qFamStud.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.qFamStud.Location = new System.Drawing.Point(120, 24);
             this.qFamStud.Margin = new System.Windows.Forms.Padding(6);
-            this.qFamStud.MaxLength = 25;
+            this.qFamStud.MaxLength = 50;
             this.qFamStud.Name = "qFamStud";
             this.qFamStud.Size = new System.Drawing.Size(423, 29);
             this.qFamStud.TabIndex = 1;
             this.qFamStud.TextChanged += new System.EventHandler(this.qFamStud_TextChanged);
+            this.qFamStud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckKeyPress);
             // 
             // qStartTest
             // 
@@ -89,16 +90,17 @@ namespace Client.Forms
             this.qNameStud.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.qNameStud.Location = new System.Drawing.Point(120, 65);
             this.qNameStud.Margin = new System.Windows.Forms.Padding(6);
-            this.qNameStud.MaxLength = 15;
+            this.qNameStud.MaxLength = 50;
             this.qNameStud.Name = "qNameStud";
             this.qNameStud.Size = new System.Drawing.Size(423, 29);
             this.qNameStud.TabIndex = 3;
             this.qNameStud.TextChanged += new System.EventHandler(this.qNameStud_TextChanged);
+            this.qNameStud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckKeyPress);
             // 
             // groupBox1
             // 
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.groups—omboBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label3);
@@ -124,6 +126,7 @@ namespace Client.Forms
             this.groups—omboBox.Size = new System.Drawing.Size(422, 28);
             this.groups—omboBox.TabIndex = 17;
             this.groups—omboBox.ValueMember = "id";
+            this.groups—omboBox.SelectedIndexChanged += new System.EventHandler(this.groups—omboBox_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -211,9 +214,11 @@ namespace Client.Forms
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(186, 237);
+            this.textBox1.MaxLength = 15;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(385, 26);
             this.textBox1.TabIndex = 15;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // MainForm
@@ -221,7 +226,7 @@ namespace Client.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(589, 326);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
@@ -237,6 +242,7 @@ namespace Client.Forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "œÓ„‡ÏÏ‡ ÚÂÒÚËÓ‚‡ÌËˇ ÒÚÛ‰ÂÌÚÓ‚";
             this.Load += new System.EventHandler(this.MainForm_Load);

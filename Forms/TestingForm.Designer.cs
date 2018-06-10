@@ -287,7 +287,7 @@ namespace Client.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1046, 544);
             this.ControlBox = false;
             this.Controls.Add(this.totalQuetionsLabel);
@@ -301,6 +301,7 @@ namespace Client.Forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TestingForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тестирование";
             this.Load += new System.EventHandler(this.TestingForm_Load);

@@ -7,6 +7,7 @@ using Client.Models;
 using Client.Helpers;
 
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Client.Forms
 {
@@ -19,7 +20,7 @@ namespace Client.Forms
 
         List<Subject> subjects;
         List<Theme> themes;
-        List<Group> groups;
+        List<Models.Group> groups;
 
         Subject currentSubject;
         Theme currentTheme;
@@ -42,9 +43,9 @@ namespace Client.Forms
                 {
                     // эта лямбда-функция для того, чтобы после запроса и его обработки выполнилось какое-либо событие
                     // она передаётся дальше
-                    groups = returned as List<Group>;
+                    groups = returned as List<Models.Group>;
                     this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
-                    foreach (Group group in groups)
+                    foreach (Models.Group group in groups)
                     {
                         this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Add(group)));
                     }
@@ -111,7 +112,6 @@ namespace Client.Forms
 
         private void qStartTest_Click(object sender, EventArgs e)
         {
-            
             discipline discipline = new discipline()
             {
                 subject = currentSubject,
@@ -154,26 +154,29 @@ namespace Client.Forms
 
         private void isFill()
         {
-            if (comboBox2.SelectedItem != null && qFamStud.Text != "" && qNameStud.Text != "" && comboBox1.SelectedItem != null)
-            {
-                qStartTest.Enabled = true;
-            }
-            else
-            {
-                qStartTest.Enabled = false;
-            }
+            qStartTest.Enabled = comboBox2.SelectedItem != null && qFamStud.Text != "" && qNameStud.Text != "" && comboBox1.SelectedItem != null && groupsСomboBox.SelectedItem != null;   
         }
 
         private void qFamStud_TextChanged(object sender, EventArgs e)
         {
-            QuestionHelper.client.surname = qFamStud.Text;
+            Regex regex = new Regex("^[А-ЯЁ]{1}[а-яё]{0,49}$");
+            if (regex.IsMatch(qFamStud.Text))
+            {
+                QuestionHelper.client.surname = qFamStud.Text;
+            }
             isFill();
+            FirstCharToUpper(sender as TextBox);
         }
 
         private void qNameStud_TextChanged(object sender, EventArgs e)
         {
-            QuestionHelper.client.name = qNameStud.Text;
+            Regex regex = new Regex("^[А-ЯЁ]{1}[а-яё]{0,49}$");
+            if (regex.IsMatch(qNameStud.Text))
+            {
+                QuestionHelper.client.name = qNameStud.Text;
+            }
             isFill();
+            FirstCharToUpper(sender as TextBox);
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
@@ -199,6 +202,42 @@ namespace Client.Forms
             Properties.Settings.Default.IP = line;
             Properties.Settings.Default.Save();
             SocketHelper.NotificateIpChanged();
+        }
+
+        private void groupsСomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            QuestionHelper.client.group = groupsСomboBox.SelectedItem as Models.Group;
+            isFill();
+        }
+
+        private void CheckKeyPress(object sender, KeyPressEventArgs e)
+        {
+            string ch = e.KeyChar.ToString();
+            Regex regex = new Regex("[А-Яа-я]");
+            if (!regex.IsMatch(ch) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+        private void FirstCharToUpper(TextBox textbox)
+        {
+            if (textbox.Text != "")
+            {
+                var line = textbox.Text.ToCharArray();
+                line[0] = Convert.ToChar(line[0].ToString().ToUpper());
+                textbox.Text = new string(line);
+                textbox.Select(textbox.Text.Length, 0);
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string ch = e.KeyChar.ToString();
+            Regex regex = new Regex("[0-9.]");
+            if (!regex.IsMatch(ch) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

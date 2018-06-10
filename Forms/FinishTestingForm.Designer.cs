@@ -147,7 +147,7 @@ namespace Client.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(524, 376);
             this.Controls.Add(this.mistakesButton);
             this.Controls.Add(this.label4);
@@ -162,6 +162,7 @@ namespace Client.Forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FinishTestingForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Результаты тестирования";
             this.Load += new System.EventHandler(this.FinishTestingForm_Load);
