@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Клиент системы тестирования")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Zolotov Nikita")]
+[assembly: AssemblyCompany("Золотов Никита")]
 [assembly: AssemblyProduct("Client")]
-[assembly: AssemblyCopyright("©zn, 2018")]
+[assembly: AssemblyCopyright("©Золотов Никита, 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

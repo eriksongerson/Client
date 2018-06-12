@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,7 +17,6 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             //SpinnerView spinnerView = new SpinnerView("Попытка соединения с сервером. Ожидайте...");
             //spinnerView.ShowDialog();
             // Запрос соединения к серверу

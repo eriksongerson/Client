@@ -27,6 +27,7 @@ namespace Client.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.mistakesButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,8 +108,10 @@ namespace Client.Forms
             this.label2.Location = new System.Drawing.Point(15, 184);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(500, 42);
+            this.label2.Size = new System.Drawing.Size(376, 42);
             this.label2.TabIndex = 4;
+            this.label2.Text = "В процентах(%):";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
@@ -125,7 +128,7 @@ namespace Client.Forms
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(182, 243);
+            this.label4.Location = new System.Drawing.Point(258, 241);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 36);
             this.label4.TabIndex = 6;
@@ -143,12 +146,25 @@ namespace Client.Forms
             this.mistakesButton.UseVisualStyleBackColor = true;
             this.mistakesButton.Click += new System.EventHandler(this.mistakesButton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(453, 197);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 29);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "---";
+            // 
             // FinishTestingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(524, 376);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.mistakesButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -185,5 +201,6 @@ namespace Client.Forms
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button mistakesButton;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -52,13 +52,17 @@ namespace Client.Forms
 
         private void FinishTestingForm_Load(object sender, EventArgs e)
         {
+            QuestionHelper.isTesting = false;
+
             qF.Text = QuestionHelper.client.surname;
             qN.Text = QuestionHelper.client.name;
             qResult.Text = QuestionHelper.RightQuantity.ToString();
+            
 
             double Percent = (double)QuestionHelper.RightQuantity / (double)QuestionHelper.TotalQuestions;
             Mark mark = GetMark(Percent);
 
+            label5.Text = $"{Percent * 100}%";
             label4.Text = $"{(int)mark}";
 
             disciplineWithMark disciplineWithMark = new disciplineWithMark()
