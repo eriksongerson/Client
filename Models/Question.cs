@@ -1,60 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Client.Models
-{
-    public class Question
-    {
-
-        int id;
-        int id_subject;
-        int id_theme;
-        string name;
-        List<Option> options;
-        Type type;
-
-        public int Id
-        {
-            set { this.id = value; }
-            get { return this.id; }
+﻿using System.Collections.Generic;
+namespace Client.Models {
+    // Класс вопроса
+    public class Question {
+        int id; // id вопроса
+        int id_subject; // id предмета
+        int id_theme; // id темы
+        string name; // вопрос
+        List<Option> options; // список вариантов ответа
+        Type type; // Тип вопроса
+        // свойство поля вопроса
+        public string Name {
+            set => this.name = value;
+            get => this.name;
         }
-        public int Id_subject
-        {
-            set { this.id_subject = value; }
-            get { return this.id_subject; }
+        // Свойство вариантов ответа
+        public List<Option> Options {
+            set => this.options = value;
+            get => this.options;
         }
-        public int Id_theme
-        {
-            set { this.id_theme = value; }
-            get { return this.id_theme; }
+        // Свойство типа вопроса
+        public Type Type {
+            set => this.type = value;
+            get => this.type;
         }
-        public string Name
-        {
-            set { this.name = value; }
-            get { return this.name; }
-        }
-        public List<Option> Options
-        {
-            set { this.options = value; }
-            get { return this.options; }
-        }
-        public Type Type
-        {
-            set { this.type = value; }
-            get { return this.type; }
-        }
-
-        public Question() { }
-        public Question(int id, int id_subject, int id_theme, string name, List<Option> options, Type type)
-        {
-            this.id = id;
-            this.id_subject = id_subject;
-            this.id_theme = id_theme;
-            this.name = name;
-            this.options = options;
-            this.type = type;
-        }
-
     }
 }

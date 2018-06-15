@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Client.Models
-{
-    public class Request
-    {
-        public string request;
-        public Client client;
-        public string body;
+﻿namespace Client.Models {
+    // Класс запроса
+    public class Request {
+        public string request; // запрос
+        public Client client; // Клиент запроса
+        public string body; // тело запроса
     }
 }

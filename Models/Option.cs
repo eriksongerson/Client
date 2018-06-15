@@ -1,23 +1,13 @@
-﻿namespace Client.Models
-{
-    public class Option
-    {
-        public int id;
-        public int id_question;
-        public string option;
-        public bool isRight;
-
+﻿namespace Client.Models {
+    // Класс варианта ответа
+    public class Option {
+        public int id; // id ответа
+        public int id_question; // id вопроса соответствующего варианту ответа
+        public string option; // название ответа
+        public bool isRight; // верный ли ответ
+        // Конструктор
         public Option(){ }
-
-        public Option(string option, bool isRight)
-        {
-            this.option = option;
-            this.isRight = isRight;
-        }
-
-        public static implicit operator string(Option v)
-        {
-            return v.option;
-        }
+        // Перегруженный итератор
+        public static implicit operator string(Option v) => v.option;
     }
 }

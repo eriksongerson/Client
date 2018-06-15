@@ -1,11 +1,10 @@
-﻿namespace Client.Models
-{
-    public class Client
-    {
-        public string ip;
-        public string pc;
-        public string surname;
-        public string name;
-        public Group group;
+﻿namespace Client.Models {
+    // Класс клиента
+    public class Client {
+        public string ip; // IP-адрес клиента 
+        public string pc; // Имя ПК
+        public string surname; // фамилия клиента
+        public string name; // имя клиента
+        public Group group; // группа клиента
     }
 }

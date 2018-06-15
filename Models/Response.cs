@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Client.Models
-{
-    public class Response
-    {
-        public string response;
-        public string body;
+﻿namespace Client.Models {
+    // Класс Ответа
+    public class Response {
+        public string response; // ответ
+        public string body; // тело ответа
     }
 }

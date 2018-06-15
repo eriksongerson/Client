@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-
-namespace Client.Models
-{
-    public class Answer
-    {
-
-        public Question question;
-        public List<Option> choosen;
-
+namespace Client.Models {
+    // Класс ответа
+    public class Answer {
+        public Question question; // Вопрос
+        public List<Option> choosen; // Выбранные клиентом варианты ответа
     }
 }
