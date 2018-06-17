@@ -5,6 +5,8 @@ using System.Threading;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Client.Models;
+using System;
+
 namespace Client.Helpers {
     // Класс SocketHelper позволяет отправлять запросы
     public class SocketHelper {
@@ -86,12 +88,15 @@ namespace Client.Helpers {
                 networkStream.Close();
                 tcpClient.Close();
             }
-            catch (SocketException)
+            catch (Exception)
             {
                 // Если запрос не получается отправить, пытаемся снова и снова
                 networkStream?.Close();
                 tcpClient?.Close();
-                DoRequest(request, execute);
+                Thread.Sleep(1000);
+                new Thread(() => { 
+                    Thread.CurrentThread.IsBackground = true;
+                    new SocketHelper().DoRequest(request, execute); }).Start();
             }
         }
         // Функция получения локального ip-адреса

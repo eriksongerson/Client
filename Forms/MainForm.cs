@@ -38,11 +38,13 @@ namespace Client.Forms {
                     // Получение группы
                     groups = returned as List<Models.Group>;
                     // Очищаем выпадающий список
-                    this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Clear()));
-                    // И заполняем его
-                    foreach (Models.Group group in groups) {
-                        this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Add(group)));
-                    }
+                    try { 
+                        this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Clear()));
+                        // И заполняем его
+                        foreach (Models.Group group in groups) {
+                            this.groupsСomboBox.BeginInvoke((MethodInvoker)(() => groupsСomboBox.Items.Add(group)));
+                        } 
+                    } catch (InvalidOperationException) {}
                 });
             }).Start();
             // Запрос предметов
@@ -59,11 +61,13 @@ namespace Client.Forms {
                     // она передаётся дальше
                     subjects = returned as List<Subject>;
                     // Очистка выпадающего списка
-                    this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
-                    // Заполнение 
-                    foreach (Subject subject in subjects) {
-                        this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Add(subject)));
-                    }
+                    try { 
+                        this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Clear()));
+                        // Заполнение 
+                        foreach (Subject subject in subjects) {
+                            this.comboBox1.BeginInvoke((MethodInvoker)(() => comboBox1.Items.Add(subject)));
+                        }
+                    }catch (InvalidOperationException) {}
                 });
             }).Start(); // Он выполнится и сразу уничтожится. Не нужно контроллировать его жизненный цикл
         }
@@ -86,11 +90,13 @@ namespace Client.Forms {
                     // Получение тем из ответа
                     themes = returned as List<Theme>;
                     // Очистка выпадающего списка
-                    this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Clear()));
-                    // Заполнение
-                    foreach (Theme theme in themes) {
-                        this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Add(theme)));
-                    }
+                    try { 
+                        this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Clear()));
+                        // Заполнение
+                        foreach (Theme theme in themes) {
+                            this.comboBox2.BeginInvoke((MethodInvoker)(() => comboBox2.Items.Add(theme)));
+                        }
+                    } catch (InvalidOperationException){} 
                 });
             }).Start();
             // Активация выпадающего списка
@@ -128,9 +134,11 @@ namespace Client.Forms {
                     QuestionHelper.Questions = questions;
                     // и переходим на форму тестирования
                     TestingForm testingForm = new TestingForm();
-                    this.BeginInvoke((MethodInvoker)(() => this.Hide()));
-                    if (testingForm.ShowDialog() != DialogResult.OK)
-                        try { this.BeginInvoke((MethodInvoker)(() => this.Close())); } catch(InvalidOperationException){}
+                    try { 
+                        this.BeginInvoke((MethodInvoker)(() => this.Hide()));
+                        if (testingForm.ShowDialog() != DialogResult.OK)
+                            this.BeginInvoke((MethodInvoker)(() => this.Close())); 
+                    } catch(InvalidOperationException){}
                 });
             }).Start();
         }
